@@ -35,15 +35,8 @@ const Footer: React.FC = () => {
           }}
         />
 
-        {/* Delicate Top Gold Flourish Crest */}
-        <div className="flex items-center justify-center gap-2 pt-3 pb-1">
-          <div className="h-[1px] w-14 sm:w-24 bg-gradient-to-r from-transparent via-[#FFD700]/60 to-transparent"></div>
-          <span className="text-[#FFD700] text-[11px] drop-shadow-[0_0_8px_rgba(255,215,0,0.6)]">❖</span>
-          <div className="h-[1px] w-14 sm:w-24 bg-gradient-to-r from-transparent via-[#FFD700]/60 to-transparent"></div>
-        </div>
-
         {/* Snug & Compact Main Container */}
-        <div className="max-w-md mx-auto px-4 sm:px-6 pt-2 pb-6 sm:pb-7 flex flex-col items-center text-center relative z-10">
+        <div className="max-w-md mx-auto px-4 sm:px-6 pt-4 sm:pt-5 pb-6 sm:pb-7 flex flex-col items-center text-center relative z-10">
 
           {/* Section Header Caption */}
           <motion.div
@@ -97,7 +90,7 @@ const Footer: React.FC = () => {
                 </a>
                 <span className="text-[#FFD700]/50 select-none text-[8px]">•</span>
                 <a
-                  href="https://www.instagram.com/uthsav_invites"
+                  href="https://www.instagram.com/udaystudio_pgr?rpxt=MWxxb3B5bmR3bWh3aA=="
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/85 hover:text-[#FFD700] transition-colors duration-200 underline-offset-2 hover:underline font-medium"
@@ -106,7 +99,7 @@ const Footer: React.FC = () => {
                 </a>
                 <span className="text-[#FFD700]/50 select-none text-[8px]">•</span>
                 <a
-                  href="https://uthsavinvites.in"
+                  href="https://udaystudio.in/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/85 hover:text-[#FFD700] transition-colors duration-200 underline-offset-2 hover:underline font-medium"
