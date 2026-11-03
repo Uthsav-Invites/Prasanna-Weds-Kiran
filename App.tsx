@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import WelcomeScreen from './components/WelcomeScreen';
+import Preloader from './components/Preloader';
 import { AnimatePresence, motion } from 'framer-motion';
 import MobileOnlyWarning from './components/MobileOnlyWarning';
+import Footer from './components/Footer';
 
 
 
@@ -180,55 +182,14 @@ const Layout: React.FC<{
         {children}
       </main>
 
-      <footer className="pt-0 pb-12 bg-transparent text-center relative overflow-hidden z-0">
-        <div className="max-w-4xl mx-auto px-4 relative z-10 flex flex-col items-center">
-          <img
-            src="/0.png"
-            alt="Traditional Wedding Footer"
-            className="w-full h-auto max-w-2xl mix-blend-multiply transform hover:scale-[1.02] transition-transform duration-500"
-          />
-        </div>
-      </footer>
-
-      <section className="py-6 border-t border-[#800000]/15 bg-[#FDF5E6]/70 backdrop-blur-sm text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <p className="text-[10px] tracking-[0.25em] uppercase opacity-80 font-bold text-[#4A0E0E]">
-            Designed by Sridhar Reddy Nalipi
-          </p>
-          <div className="mt-3 flex items-center justify-center gap-5 text-[11px] font-semibold tracking-widest uppercase text-[#4A0E0E]/70">
-            <a
-              href="https://wa.me/917386376302?text=Hi..%20I%20like%20that%20invitation%20very%20much.."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#800000] transition-colors"
-            >
-              WhatsApp
-            </a>
-            <a
-              href="https://bit.ly/nsr7831"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#800000] transition-colors"
-            >
-              Portfolio
-            </a>
-            <a
-              href="https://www.instagram.com/sridharreddy7831"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#800000] transition-colors"
-            >
-              Instagram
-            </a>
-          </div>
-        </div>
-      </section>
+      <Footer />
     </div>
   );
 }
 
 const App: React.FC = () => {
   const [petals, setPetals] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [showWelcome, setShowWelcome] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
@@ -237,7 +198,9 @@ const App: React.FC = () => {
     // Generate rich petal & sparkle properties
     const dotColors = ['#FFD700', '#FFF4CC', '#FFDE7A', '#FFFFFF', '#FF8C00', '#FF4500'];
     const symbols = ['🌸', '✨', '🌼', '💛', '•', '✨'];
-    const newPetals = Array.from({ length: 24 }, (_, i) => ({
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const petalCount = isMobile ? 10 : 18;
+    const newPetals = Array.from({ length: petalCount }, (_, i) => ({
       id: i,
       size: i % 4 === 0 ? 14 : 6 + Math.random() * 8,
       duration: 10 + Math.random() * 16,
@@ -295,13 +258,19 @@ const App: React.FC = () => {
       <NavigationHandler isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
 
       <AnimatePresence mode="wait">
-        {showWelcome && (
+        {isLoading && (
+          <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence mode="wait">
+        {!isLoading && showWelcome && (
           <WelcomeScreen key="welcome" onOpen={handleOpenInvitation} />
         )}
       </AnimatePresence>
 
-      {/* Petal & Sparkle Falling Animation */}
-      {petals.map(petal => (
+      {/* Petal & Sparkle Falling Animation (active after welcome) */}
+      {!showWelcome && petals.map(petal => (
         <div
           key={petal.id}
           className="petal"
@@ -332,7 +301,7 @@ const App: React.FC = () => {
                 animationDuration: `${petal.swayDuration}s`,
                 borderRadius: '9999px',
                 background: petal.color,
-                boxShadow: '0 0 12px rgba(255, 215, 0, 0.6), 0 0 4px rgba(255, 255, 255, 0.8)'
+                boxShadow: '0 0 6px rgba(255, 215, 0, 0.5)'
               }}
             />
           )}

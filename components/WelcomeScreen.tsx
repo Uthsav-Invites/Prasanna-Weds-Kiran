@@ -17,50 +17,39 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onOpen }) => {
     return (
         <motion.div
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
             className="fixed inset-0 z-[1000] bg-[#4A0E0E] flex items-center justify-center overflow-hidden touch-none"
         >
-            {/* Background image with Ken Burns slow zoom effect */}
-            <motion.div
-                initial={{ scale: 1 }}
-                animate={{ scale: [1, 1.12, 1] }}
-                transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-0 bg-cover bg-center opacity-65"
-                style={{ backgroundImage: "url('/2.1.jpg')" }}
+            {/* Background image with subtle Ken Burns effect */}
+            <div
+                className="absolute inset-0 bg-cover bg-center opacity-35 will-change-transform"
+                style={{ backgroundImage: "url('/010.jpeg')" }}
             />
 
-            {/* CSS Frosted-glass backdrop overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#4A0E0E]/40 to-black/75 backdrop-blur-[12px] -webkit-backdrop-blur-[12px] z-[1]" />
+            {/* Dark gradient overlay for legibility without heavy runtime filters */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-[#4A0E0E]/50 to-black/85 backdrop-blur-[2px] z-[1]" />
 
-            {/* Decorative Mandalas */}
-            <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-24 -left-24 w-64 h-64 md:w-96 md:h-96 opacity-15 pointer-events-none z-[2]"
-            >
+            {/* Decorative Corner Mandalas */}
+            <div className="absolute -top-24 -left-24 w-64 h-64 md:w-96 md:h-96 opacity-15 pointer-events-none z-[2] animate-spin" style={{ animationDuration: '40s' }}>
                 <svg viewBox="0 0 200 200" className="w-full h-full text-[#FFD700] fill-current">
                     <path d="M100,0 C110,40 150,40 150,100 C150,160 110,160 100,200 C90,160 50,160 50,100 C50,40 90,40 100,0 Z" />
                 </svg>
-            </motion.div>
-            <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-                className="absolute -bottom-24 -right-24 w-64 h-64 md:w-96 md:h-96 opacity-15 pointer-events-none z-[2]"
-            >
+            </div>
+            <div className="absolute -bottom-24 -right-24 w-64 h-64 md:w-96 md:h-96 opacity-15 pointer-events-none z-[2] animate-spin" style={{ animationDuration: '45s', animationDirection: 'reverse' }}>
                 <svg viewBox="0 0 200 200" className="w-full h-full text-[#FFD700] fill-current">
                     <path d="M100,0 C110,40 150,40 150,100 C150,160 110,160 100,200 C90,160 50,160 50,100 C50,40 90,40 100,0 Z" />
                 </svg>
-            </motion.div>
+            </div>
 
             {/* Main Interactive Invitation Container */}
             <div className="relative z-10 text-center px-6 max-w-2xl mx-auto flex flex-col items-center justify-center">
-                
+
                 {/* Traditional Invocations */}
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -15 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.7 }}
                     className="mb-2"
                 >
                     <p className="text-[11px] md:text-xs font-serif text-[#FFD700] tracking-[0.25em] uppercase drop-shadow">
@@ -74,12 +63,9 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onOpen }) => {
                 {/* Floating Diya Icon Motif */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: [0.85, 1, 0.85], scale: [1, 1.05, 1] }}
-                    transition={{ 
-                        opacity: { delay: 0.2, duration: 0.8 },
-                        scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                    }}
-                    className="w-16 h-16 md:w-20 md:h-20 my-3 pointer-events-none"
+                    animate={{ scale: [1, 1.05, 1], opacity: 1 }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-16 h-16 md:w-20 md:h-20 my-2 pointer-events-none"
                 >
                     <svg viewBox="0 0 100 100" className="w-full h-full text-[#FFD700] fill-current drop-shadow-[0_0_15px_rgba(255,215,0,0.7)]">
                         <path d="M50 12 C54 22 64 32 64 47 C64 62 58 72 50 72 C42 72 36 62 36 47 C36 32 46 22 50 12 Z" fill="#FFA500" />
@@ -92,8 +78,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onOpen }) => {
                 <motion.div
                     initial={{ y: -10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="flex flex-col items-center mb-3"
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                    className="flex flex-col items-center mb-2"
                 >
                     <div className="text-xs md:text-sm font-bold text-[#FFD700] uppercase tracking-[0.4em] drop-shadow">
                         Andela Vari
@@ -101,67 +87,47 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onOpen }) => {
                     <div className="text-xl md:text-2xl font-script text-[#FFD700] tracking-wider mt-0.5">
                         Wedding Invitation
                     </div>
-                    
+
                     {/* Gold Gradient Flourish Divider */}
-                    <div className="flex items-center justify-center gap-3 my-2 text-[#FFD700] opacity-80">
-                        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#FFD700]"></div>
-                        <span className="text-xs">🪔</span>
-                        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#FFD700]"></div>
-                    </div>
                 </motion.div>
 
                 {/* Welcome Subheader */}
-                <motion.p
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 0.85 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="text-white font-serif italic text-xs md:text-sm mb-4 max-w-md tracking-wider leading-relaxed"
-                >
+                <p className="text-white font-serif italic text-xs md:text-sm mb-3 max-w-md tracking-wider leading-relaxed opacity-90">
                     Cordially invite you to celebrate the marriage of
-                </motion.p>
-
-                {/* Monogram Badge */}
-                <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
-                    className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-full border border-[#FFD700]/60 bg-[#800000]/40 backdrop-blur-md text-[#FFD700] font-traditional font-bold text-lg shadow-[0_0_20px_rgba(255,215,0,0.4)]"
-                >
-                    PK
-                </motion.div>
+                </p>
 
                 {/* Main Names with Gold Glow Effect */}
                 <motion.div
-                    initial={{ scale: 0.85, opacity: 0 }}
+                    initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1.2, delay: 0.9, type: "spring" }}
-                    className="mb-8"
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="mb-6"
                 >
                     <h1 className="text-white font-traditional text-3xl sm:text-5xl md:text-6xl mb-1 drop-shadow-[0_0_35px_rgba(255,215,0,0.65)] font-bold tracking-wide flex flex-col items-center gap-1">
                         <span className="whitespace-nowrap">Prasanna Priya</span>
                         <span className="text-[#FFD700] font-script text-3xl sm:text-5xl md:text-6xl leading-none">&</span>
                         <span className="whitespace-nowrap">Kiran</span>
                     </h1>
-                    <p className="text-[#FFD700]/90 font-serif italic text-xs md:text-sm mt-3 tracking-widest">
+                    <p className="text-[#FFD700]/90 font-serif italic text-xs md:text-sm mt-2 tracking-widest">
                         19th November, 2026 • Punganur
                     </p>
                 </motion.div>
 
-                {/* Animated Pulsing Call-to-action Button */}
+                {/* Unlocked Open Invitation Button */}
                 <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 1.2 }}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
                     className="w-full flex justify-center"
                 >
                     <motion.button
                         onClick={onOpen}
-                        animate={{ 
+                        animate={{
                             boxShadow: [
-                                "0 0 15px rgba(255,215,0,0.3)", 
-                                "0 0 35px rgba(255,215,0,0.7)", 
+                                "0 0 15px rgba(255,215,0,0.3)",
+                                "0 0 35px rgba(255,215,0,0.7)",
                                 "0 0 15px rgba(255,215,0,0.3)"
-                            ] 
+                            ]
                         }}
                         transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
                         whileHover={{
@@ -171,21 +137,19 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onOpen }) => {
                             boxShadow: "0 0 45px rgba(255, 215, 0, 0.85)"
                         }}
                         whileTap={{ scale: 0.95 }}
-                        className="px-12 py-4 bg-transparent border-2 border-[#FFD700] text-[#FFD700] font-bold rounded-full transition-all duration-500 tracking-[0.3em] text-xs md:text-sm group relative overflow-hidden shadow-2xl"
+                        className="px-10 py-3.5 bg-transparent border-2 border-[#FFD700] text-[#FFD700] font-bold rounded-full transition-all duration-300 tracking-[0.28em] text-xs md:text-sm group relative overflow-hidden shadow-2xl"
                     >
-                        <span className="relative z-10 font-bold">OPEN INVITATION</span>
+                        <span className="relative z-10 font-bold flex items-center gap-2">
+                            <span>OPEN INVITATION</span>
+                            <span className="text-sm">✦</span>
+                        </span>
                     </motion.button>
                 </motion.div>
 
                 {/* Footer Invitation Phrase */}
-                <motion.p 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.6 }}
-                    transition={{ duration: 1, delay: 1.5 }}
-                    className="mt-6 text-white text-[10px] uppercase tracking-widest font-bold animate-pulse"
-                >
+                <p className="mt-5 text-white/70 text-[9.5px] uppercase tracking-widest font-bold">
                     Bless us with your esteemed presence
-                </motion.p>
+                </p>
             </div>
         </motion.div>
     );

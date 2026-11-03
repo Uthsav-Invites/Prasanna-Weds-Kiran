@@ -43,8 +43,11 @@ export const SLOKAS = [
 
 export const HORIZONTAL_IMAGES = [
   { url: '/1.jpeg' },
-  { url: '/22.jpeg' },
-  { url: '/33.jpeg' },
-  { url: '/44.jpeg' },
+  { url: '/2.jpeg' },
+  { url: '/3.jpeg' },
+];
+
+export const VERTICAL_IMAGES = [
+  { url: '/4.jpeg' },
   { url: '/5.jpeg' },
 ];

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { HORIZONTAL_IMAGES } from '../constants';
+import { HORIZONTAL_IMAGES, VERTICAL_IMAGES } from '../constants';
 
-const ImageSlider: React.FC<{ images: { url: string }[]; aspect: string; title?: string }> = ({ images, aspect, title }) => {
+const ImageSlider: React.FC<{ images: { url: string }[]; aspect: string; title?: string; maxWidth?: string }> = ({ images, aspect, title, maxWidth = 'max-w-4xl' }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const ImageSlider: React.FC<{ images: { url: string }[]; aspect: string; title?:
   return (
     <div className="mb-16">
       {title && <h3 className="text-2xl font-script text-[#800000] mb-6 text-center">{title}</h3>}
-      <div className="relative group max-w-4xl mx-auto">
+      <div className={`relative group ${maxWidth} mx-auto`}>
         <div className={`relative ${aspect} overflow-hidden rounded-[2rem] shadow-2xl border-2 border-[#FFD700]/40 bg-[#4A0E0E]/5`}>
           <div className="relative w-full h-full overflow-hidden">
             <div
@@ -99,12 +99,27 @@ const Gallery: React.FC = () => {
               images={HORIZONTAL_IMAGES}
               // title="Panoramic Memories"
               aspect="aspect-[3/2] md:aspect-[16/9]"
+              maxWidth="max-w-4xl"
             />
           </motion.div>
         )}
 
-
-
+        {/* Vertical Slideshow */}
+        {VERTICAL_IMAGES.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <ImageSlider
+              images={VERTICAL_IMAGES}
+              // title="Portrait Moments"
+              aspect="aspect-[2/3]"
+              maxWidth="max-w-sm md:max-w-md"
+            />
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

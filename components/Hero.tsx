@@ -52,12 +52,13 @@ const Hero: React.FC = () => {
       {/* Ken Burns Background Image Effect */}
       <motion.div
         initial={{ scale: 1 }}
-        animate={{ scale: [1, 1.12, 1] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute inset-0 z-0 bg-cover bg-center"
+        animate={{ scale: [1, 1.08, 1] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute inset-0 z-0 will-change-transform"
         style={{
-          backgroundImage: `url('/5.jpg')`,
-          filter: 'brightness(0.45)'
+          backgroundImage: `url('/4.jpeg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       />
 
@@ -130,17 +131,17 @@ const Hero: React.FC = () => {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.9 }}
-          className="my-6 flex flex-col items-center gap-2 text-center"
+          className="my-5 sm:my-6 flex flex-col items-center gap-1 sm:gap-2 text-center"
         >
-          <h1 className="text-white font-traditional text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wider drop-shadow-2xl font-bold uppercase whitespace-nowrap">
+          <h1 className="text-white font-traditional text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider drop-shadow-2xl font-bold uppercase whitespace-nowrap">
             Prasanna Priya
           </h1>
 
-          <span className="text-[#FFD700] font-script text-4xl sm:text-6xl md:text-7.5xl lg:text-8.5xl drop-shadow-[0_0_25px_rgba(255,215,0,0.7)] inline-block leading-none">
+          <span className="text-[#FFD700] font-script text-3xl sm:text-5xl md:text-6xl lg:text-7xl drop-shadow-[0_0_25px_rgba(255,215,0,0.7)] inline-block leading-none my-1">
             &
           </span>
 
-          <h1 className="text-white font-traditional text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wider drop-shadow-2xl font-bold uppercase whitespace-nowrap">
+          <h1 className="text-white font-traditional text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider drop-shadow-2xl font-bold uppercase whitespace-nowrap">
             Kiran
           </h1>
         </motion.div>
